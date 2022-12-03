@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <base />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="assets/number_search/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/number_search/css/style.css" rel="stylesheet" />
     <style>
@@ -29,15 +29,78 @@
             margin-top: 214px !important;
             margin-bottom: 14px !important
         }
+        #search{
+          margin-right: 10px;
+          /* display: flex; */
+          padding-left: 15px;
+          outline: none;
+          border: none;
+          max-width: 65%;
+          width: 100%;
+          height: 35px;
+          border-radius: 5px;
+        }
+        .tab-content{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 86%;
+          margin: auto;
+          margin-top: 30px;
+        }
+        #toll_free{width: 70%;}
+        .ngayle{
+          display: flex;
+          z-index: 1;
+          height: 100%;
+          position: fixed;
+          background: #0000005c;
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+        }
+        .ngayle_country{
+          max-height: 630px;
+          width: 100%;
+          height: 100%;
+          background: beige;
+          max-width: 25%;
+          background: url('assets/number_search/images/background_festival1.jpg');
+          background-repeat: no-repeat;
+          background-size: cover;
+          border-radius: 5px;
+        }
+        .nav-tabs > li > a:after{
+          z-index: 0 !important;
+        }
+        .country{
+          font-weight: 600;
+          font-size: 45px;
+          font-family: sans-serif;
+          text-align: center;
+          padding-top: 20px;
+          color: #e55050;
+        }
+        .modal-body{
+          background: url('assets/number_search/images/background_festival1.jpg');
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
     </style>
   </head>
   <body onLoad="">
+    <!-- <div class="ngayle">
+      <div class="ngayle_country">
+        <div class="country">Viet Nam</div>
+        <div class="text_country"></div>
+      </div>
+    </div> -->
     <div class="header" id="header">
       <div class="container">
         <div class="row header-wrapper">
           <div class="hidden-xs">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-8">
                 <div class="header-title title-text">
                   Telephone Number Ordering System
                 </div>
@@ -49,649 +112,136 @@
     </div>
     <div class="main">
       <div class="container">
-        <div class="row">
-          <div class="main-container">
-            <div class="title-text main-title">Choose Number</div>
+        <div class="main-container">
+          <div class="title-text main-title">Choose Number</div>
+          <div class="clearfix">&nbsp;</div>
+
+          <div class="main-content">
+            <div class="number-type">
+              <ul class="nav nav-tabs" id="number_tab">
+                <li class="active">
+                  <a id="atoll_free" href="#toll_free" data-toggle="tab"
+                    >Toll Free Number</a
+                  >
+                </li>
+                <li>
+                  <a
+                    id="avanity_toll_free"
+                    href="#vanity_toll_free"
+                    data-toggle="tab"
+                    >Vanity Toll Free Number</a
+                  >
+                </li>
+                <li>
+                  <a id="aworld_wide" href="#world_wide" data-toggle="tab"
+                    >World Wide</a
+                  >
+                </li>
+                <li>
+                  <a
+                    id="acarrier_toll_free"
+                    href="#carrier_toll_free"
+                    data-toggle="tab"
+                    >Toll Free Carrier</a
+                  >
+                </li>
+              </ul>
+            </div>
+
             <div class="clearfix">&nbsp;</div>
-
-            <div class="main-content">
-              <div class="number-type">
-                <ul class="nav nav-tabs" id="number_tab">
-                  <li class="active">
-                    <a id="atoll_free" href="#toll_free" data-toggle="tab"
-                      >Toll Free Number</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      id="avanity_toll_free"
-                      href="#vanity_toll_free"
-                      data-toggle="tab"
-                      >Vanity Toll Free Number</a
-                    >
-                  </li>
-                  <li>
-                    <a id="aworld_wide" href="#world_wide" data-toggle="tab"
-                      >World Wide</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      id="acarrier_toll_free"
-                      href="#carrier_toll_free"
-                      data-toggle="tab"
-                      >Toll Free Carrier</a
-                    >
-                  </li>
-                </ul>
-              </div>
-
-              <div class="clearfix">&nbsp;</div>
-              <div class="tab-content">
-                <div class="tab-pane active" id="toll_free">
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <div class="radio">
-                        <input
-                          type="radio"
-                          name="toll_free_number"
-                          id="toll_free_number_800"
-                          value="800"
-                        />
-                        <!-- onclick="javascript: get_tollfree_numbers('800');" -->
-                        <label for="toll_free_number_800"
-                          ><span><span></span></span>(800) Toll free
-                          number</label
-                        >
+            <div class="tab-content">
+              <div class="tab-pane active" id="toll_free">
+                <select id="search" onchange="Apilehoi()">
+                  <option selected>Chọn Quốc Gia</option>
+                </select>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                  Xem thông tin 
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Thông tin nghĩ lễ của quốc gia</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
                       </div>
-                      <div class="radio">
-                        <input
-                          type="radio"
-                          name="toll_free_number"
-                          id="toll_free_number_833"
-                          value="833"
-                        />
-                        <!--  onclick="javascript: get_tollfree_numbers('833');"  -->
-                        <label for="toll_free_number_833"
-                          ><span><span></span></span>(833) Toll free
-                          number</label
-                        >
+                      <div class="modal-body">
+ 
                       </div>
-                      <div class="radio">
-                        <input
-                          type="radio"
-                          name="toll_free_number"
-                          id="toll_free_number_844"
-                          value="844"
-                        />
-                        <!--  onclick="javascript: get_tollfree_numbers('844');"  -->
-                        <label for="toll_free_number_844"
-                          ><span><span></span></span>(844) Toll free
-                          number</label
-                        >
-                      </div>
-                      <div class="radio">
-                        <input
-                          type="radio"
-                          name="toll_free_number"
-                          id="toll_free_number_855"
-                          value="855"
-                        />
-                        <!--  onclick="javascript: get_tollfree_numbers('855');" -->
-                        <label for="toll_free_number_855"
-                          ><span><span></span></span>(855) Toll free
-                          number</label
-                        >
-                      </div>
-                      <div class="radio">
-                        <input
-                          type="radio"
-                          name="toll_free_number"
-                          id="toll_free_number_866"
-                          value="866"
-                        />
-                        <!--  onclick="javascript: get_tollfree_numbers('866');"  -->
-                        <label for="toll_free_number_866"
-                          ><span><span></span></span>(866) Toll free
-                          number</label
-                        >
-                      </div>
-                      <div class="radio">
-                        <input
-                          type="radio"
-                          name="toll_free_number"
-                          id="toll_free_number_877"
-                          value="877"
-                        />
-                        <!--  onclick="javascript: get_tollfree_numbers('877');"  -->
-                        <label for="toll_free_number_877"
-                          ><span><span></span></span>(877) Toll free
-                          number</label
-                        >
-                      </div>
-                      <div class="radio">
-                        <input
-                          type="radio"
-                          name="toll_free_number"
-                          id="toll_free_number_888"
-                          value="888"
-                        />
-                        <!--  onclick="javascript: get_tollfree_numbers('888');"  -->
-                        <label for="toll_free_number_8 88"
-                          ><span><span></span></span>(888) Toll free
-                          number</label
-                        >
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                     </div>
-                    <div class="col-sm-8">
-                      <div id="result_panel" class="number-lists"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane" id="vanity_toll_free">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group text-center">
-                        <div class="vanity-title">
-                          Enter any combination of letters, numbers or Wildcards
-                          (the * symbol)
-                        </div>
-                        <div class="vanity-search">
-                          <div class="prefix-box">
-                            <select name="prefix" class="form-control required">
-                              <option value="8**">8**</option>
-                              <option value="800">800</option>
-                              <option value="833">833</option>
-                              <option value="844">844</option>
-                              <option value="855">855</option>
-                              <option value="866">866</option>
-                              <option value="877">877</option>
-                              <option value="888">888</option>
-                            </select>
-                            <p class="help-block"></p>
-                          </div>
-                          <div class="postfix-box">
-                            <!--populating it with value already-->
-                            <input
-                              type="text"
-                              name="postfix_number"
-                              id="postfix_number"
-                              maxlength="7"
-                              value=""
-                              class="form-control required numeric"
-                            />
-                            <p class="help-block"></p>
-                          </div>
-                          <div class="vanity-btn-box">
-                            <button
-                              type="button"
-                              name="btnGo"
-                              id="btn_vanity_search"
-                              class="btn"
-                            ></button>
-                            <!-- onclick="javascript: get_vanity_tollfree();" -->
-                            <p class="help-block"></p>
-                          </div>
-                          <div class="clearfix"></div>
-                        </div>
-                        <div id="vanity_available_search_text">
-                          You have 50 Vanity Toll Free Search Available
-                        </div>
-                        <div class="vanity-notes">
-                          Please allow 24 Hours for additional search<br />
-                          <a data-toggle="tab" href="#toll_free"
-                            >You can use Tollfree Number List to find additional
-                            numbers</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div id="vtf_result_panel" class="number-lists"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane" id="carrier_toll_free">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group text-center">
-                        <div class="vanity-title">
-                          Enter any toll free number to search carrier
-                        </div>
-                        <div class="vanity-search">
-                          <div class="postfix-box" style="padding-left: 140px">
-                            <!--populating it with value already-->
-                            <input
-                              type="text"
-                              name="postfix_number_1"
-                              id="postfix_number_1"
-                              value=""
-                              class="form-control required numeric"
-                            />
-                            <p class="help-block"></p>
-                          </div>
-                          <div class="vanity-btn-box">
-                            <button
-                              type="button"
-                              name="btnGo"
-                              id="btn_vanity_search"
-                              class="btn"
-                            ></button>
-                            <!-- onclick="javascript: get_carrier_tollfree();" -->
-                            <p class="help-block"></p>
-                          </div>
-                          <div class="clearfix"></div>
-                        </div>
-                        <div id="carrier_available_search_text">
-                          You have 50 Vanity Toll Free Search Available
-                        </div>
-                        <div class="vanity-notes">
-                          Please allow 24 Hours for additional search<br />
-                          <a data-toggle="tab" href="#toll_free"
-                            >You can use Tollfree Number List to find additional
-                            numbers</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div id="vtf_result_panel_1" class="number-lists"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane" id="local">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <div class="tf-rows">
-                          <select
-                            name="tf_country"
-                            id="tf_country"
-                            class="form-control"
-                            onchange="get_states('tf');"
-                          >
-                            <option value="">Select a Country1</option>
-                            <option value="211" cc="1">USA</option>
-                            <option value="37" cc="1">Canada</option>
-                          </select>
-                          <p class="help-block"></p>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="tf-rows">
-                          <select
-                            name="tf_state"
-                            id="tf_state"
-                            class="form-control"
-                            onchange="get_area_codes('tf');"
-                          >
-                            <option value="">Select a State</option>
-                          </select>
-                          <p class="help-block"></p>
-                        </div>
-                      </div>
-                      <div class="form-group blk_area_tf" style="display: none">
-                        <div class="tf-rows">
-                          <select
-                            name="tf_area"
-                            id="tf_area"
-                            class="form-control"
-                            onchange="javascript: get_local_numbers('LOCAL', 'tf');"
-                          >
-                            <option value="">Select an Area</option>
-                          </select>
-                          <p class="help-block"></p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div id="tf_result_panel" class="number-lists"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane" id="world_wide">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <div
-                          class="tf-rows"
-                          style="font-family: 'open_sansregular'; width: 390px"
-                        >
-                          <select
-                            name="ww_country"
-                            id="ww_country"
-                            class="form-control1"
-                            onchange=""
-                            style="width: 385px"
-                          >
-                            <option value="">Select a Country</option>
-                            <option value="211" cc="1">USA (+1)</option>
-                            <option value="2" cc="213">Algeria (+213)</option>
-                            <option value="17" cc="973">Bahrain (+973)</option>
-                            <option value="400" cc="1">Barbados (+1)</option>
-                            <option value="401" cc="375">Belarus (+375)</option>
-                            <option value="21" cc="32">Belgium (+32)</option>
-                            <option value="402" cc="229">Benin (+229)</option>
-                            <option value="403" cc="591">Bolivia (+591)</option>
-                            <option value="404" cc="387">
-                              Bosnia and Herzegovina (+387)
-                            </option>
-                            <option value="405" cc="267">
-                              Botswana (+267)
-                            </option>
-                            <option value="29" cc="55">Brazil (+55)</option>
-                            <option value="32" cc="359">Bulgaria (+359)</option>
-                            <option value="37" cc="1">Canada (+1)</option>
-                            <option value="406" cc="1">
-                              Cayman Islands (+1)
-                            </option>
-                            <option value="42" cc="56">Chile (+56)</option>
-                            <option value="43" cc="86">China (+86)</option>
-                            <option value="46" cc="57">Colombia (+57)</option>
-                            <option value="407" cc="385">Croatia (+385)</option>
-                            <option value="408" cc="357">Cyprus (+357)</option>
-                            <option value="54" cc="420">
-                              Czech Republic (+420)
-                            </option>
-                            <option value="56" cc="45">Denmark (+45)</option>
-                            <option value="224" cc="1">
-                              Dominican Republic (+1)
-                            </option>
-                            <option value="409" cc="593">Ecuador (+593)</option>
-                            <option value="410" cc="503">
-                              El Salvador (+503)
-                            </option>
-                            <option value="64" cc="372">Estonia (+372)</option>
-                            <option value="68" cc="358">Finland (+358)</option>
-                            <option value="411" cc="995">Georgia (+995)</option>
-                            <option value="412" cc="233">Ghana (+233)</option>
-                            <option value="413" cc="30">Greece (+30)</option>
-                            <option value="414" cc="1">Grenada (+1)</option>
-                            <option value="415" cc="502">
-                              Guatemala (+502)
-                            </option>
-                            <option value="416" cc="224">Guinea (+224)</option>
-                            <option value="90" cc="852">
-                              Hong Kong (+852)
-                            </option>
-                            <option value="91" cc="36">Hungary (+36)</option>
-                            <option value="92" cc="354">Iceland (+354)</option>
-                            <option value="94" cc="62">Indonesia (+62)</option>
-                            <option value="101" cc="353">Ireland (+353)</option>
-                            <option value="102" cc="972">Israel (+972)</option>
-                            <option value="417" cc="1">Jamaica (+1)</option>
-                            <option value="105" cc="81">Japan (+81)</option>
-                            <option value="418" cc="254">Kenya (+254)</option>
-                            <option value="419" cc="82">
-                              Korea Republic of (+82)
-                            </option>
-                            <option value="114" cc="371">Latvia (+371)</option>
-                            <option value="120" cc="370">
-                              Lithuania (+370)
-                            </option>
-                            <option value="121" cc="352">
-                              Luxembourg (+352)
-                            </option>
-                            <option value="420" cc="853">Macau (+853)</option>
-                            <option value="126" cc="60">Malaysia (+60)</option>
-                            <option value="421" cc="223">Mali (+223)</option>
-                            <option value="422" cc="356">Malta (+356)</option>
-                            <option value="423" cc="230">
-                              Mauritius (+230)
-                            </option>
-                            <option value="424" cc="264">Namibia (+264)</option>
-                            <option value="147" cc="64">
-                              New Zealand (+64)
-                            </option>
-                            <option value="152" cc="1">
-                              Northern Mariana Islands (+1)
-                            </option>
-                            <option value="153" cc="47">Norway (+47)</option>
-                            <option value="157" cc="507">Panama (+507)</option>
-                            <option value="160" cc="51">Peru (+51)</option>
-                            <option value="425" cc="63">
-                              Philippines (+63)
-                            </option>
-                            <option value="163" cc="351">
-                              Portugal (+351)
-                            </option>
-                            <option value="426" cc="1">Puerto Rico (+1)</option>
-                            <option value="167" cc="40">Romania (+40)</option>
-                            <option value="171" cc="1">
-                              Saint Kitts and Nevis (+1)
-                            </option>
-                            <option value="427" cc="381">Serbia (+381)</option>
-                            <option value="181" cc="65">Singapore (+65)</option>
-                            <option value="182" cc="421">
-                              Slovak Republic (+421)
-                            </option>
-                            <option value="429" cc="386">
-                              Slovenia (+386)
-                            </option>
-                            <option value="185" cc="27">
-                              South Africa (+27)
-                            </option>
-                            <option value="191" cc="46">Sweden (+46)</option>
-                            <option value="192" cc="41">
-                              Switzerland (+41)
-                            </option>
-                            <option value="430" cc="255">
-                              Tanzania (+255)
-                            </option>
-                            <option value="431" cc="66">Thailand (+66)</option>
-                            <option value="432" cc="">
-                              Trinidad and Tobago (+)
-                            </option>
-                            <option value="433" cc="216">Tunisia (+216)</option>
-                            <option value="203" cc="90">Turkey (+90)</option>
-                            <option value="434" cc="256">Uganda (+256)</option>
-                            <option value="208" cc="380">Ukraine (+380)</option>
-                            <option value="435" cc="971">
-                              United Arab Emirates (+971)
-                            </option>
-                            <option value="210" cc="44">
-                              United Kingdom (+44)
-                            </option>
-                            <option value="215" cc="58">Venezuela (+58)</option>
-                            <option value="216" cc="84">Vietnam (+84)</option>
-                          </select>
-                          <p class="help-block"></p>
-                          <select
-                            name="ww_num_location"
-                            id="ww_num_location"
-                            class="form-control1"
-                            style="width: 130px"
-                          >
-                            <option value="Number">Number</option>
-                            <option value="Location" id="ww_location">
-                              Location
-                            </option>
-                          </select>
-                          &nbsp;&nbsp;
-                          <input
-                            type="text"
-                            name="ww_phonesearch"
-                            id="ww_phonesearch"
-                            class="form-control1"
-                            style="width: 240px"
-                          />
-                          &nbsp; &nbsp;
-                          <span id="lbl_match_to"
-                            ><BR />&nbsp;<BR />Match to: &nbsp; &nbsp;</span
-                          ><select
-                            name="ww_match_to"
-                            id="ww_match_to"
-                            class="form-control1"
-                            style="width: 310px"
-                          >
-                            <option value="firstpart">
-                              First Part Of Number
-                            </option>
-                            <option value="anywhere">Anywhere In Number</option>
-                            <option value="lastpart">
-                              Last Part Of Number
-                            </option>
-                          </select>
-
-                          <p class="help-block"></p>
-
-                          <div style="float: left; margin-right: 10px">
-                            CAPABILITIES &nbsp;&nbsp;&nbsp&nbsp;&nbsp;
-                            <input
-                              type="radio"
-                              name="ww_capabilities"
-                              id="ww_capabilities"
-                              value="any"
-                              checked="checked"
-                            />
-                            <label
-                              for="ww_capabilities"
-                              style="font-size: 12px; font-weight: normal"
-                              ><span><span></span></span>ANY</label
-                            >
-                            &nbsp;&nbsp;&nbsp;| &nbsp; <BR /><input
-                              type="checkbox"
-                              name="ww_capabilities_voice"
-                              id="ww_capabilities_voice"
-                              style="margin-right: 5px"
-                            />
-                            <span
-                              style="
-                                font-family: 'open_sansregular';
-                                margin-right: 10px;
-                              "
-                              >&nbsp;&nbsp;Voice</span
-                            >
-                            &nbsp; &nbsp;<input
-                              type="checkbox"
-                              name="ww_capabilities_fax"
-                              id="ww_capabilities_fax"
-                              style="margin-right: 5px"
-                            />
-                            <span
-                              style="
-                                font-family: 'open_sansregular';
-                                margin-right: 10px;
-                              "
-                              >Fax</span
-                            >
-                            &nbsp; &nbsp;<input
-                              type="checkbox"
-                              name="ww_capabilities_sms"
-                              id="ww_capabilities_sms"
-                              style="margin-right: 5px"
-                            />
-                            <span
-                              style="
-                                font-family: 'open_sansregular';
-                                margin-right: 10px;
-                              "
-                              >SMS</span
-                            >
-                            &nbsp; &nbsp;<input
-                              type="checkbox"
-                              name="ww_capabilities_mms"
-                              id="ww_capabilities_mms"
-                              style="margin-right: 5px"
-                            />
-                            <span style="font-family: 'open_sansregular'"
-                              >MMS</span
-                            >
-                          </div>
-
-                          <div
-                            class="vanity-btn-box"
-                            style="
-                              margin-top: 7px;
-                              float: right;
-                              margin-right: 5px;
-                            "
-                          >
-                            <button
-                              type="button"
-                              name="ww_search_submit1"
-                              id="ww_search_submit1"
-                              class="btn"
-                            ></button
-                            ><BR />
-                          </div>
-                          <!-- onclick="get_worldwide_numbers('ww');return false;" -->
-                          <p class="help-block"></p>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="tf-rows">
-                          <p class="help-block"></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12" style="margin-top: 20px">
-                    <div id="ww_result_panel" class="number-lists"></div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="clearfix">&nbsp;</div>
-            <div id="back_continue_btn" class="search-submit">
-              <div class="pull-left back_button" style="display: none">
-                <a href="#" class="btn" disabled>
-                  <img
-                    src="assets/number_search/images/previous.png"
-                    alt=""
-                  />Back
-                </a>
-              </div>
-              <div class="pull-right continue_button" style="display: none">
-                <a href="order.html" class="btn">
-                  Continue<img
-                    src="assets/number_search/images/next.png"
-                    alt=""
-                  />
-                </a>
-              </div>
-            </div>
-            <div class="clearfix">&nbsp;</div>
           </div>
-
+          <div class="clearfix">&nbsp;</div>
+          <div id="back_continue_btn" class="search-submit">
+            <div class="pull-left back_button" style="display: none">
+              <a href="#" class="btn" disabled>
+                <img
+                  src="assets/number_search/images/previous.png"
+                  alt=""
+                />Back
+              </a>
+            </div>
+            <div class="pull-right continue_button" style="display: none">
+              <a href="order.html" class="btn">
+                Continue<img
+                  src="assets/number_search/images/next.png"
+                  alt=""
+                />
+              </a>
+            </div>
+          </div>
           <div class="clearfix">&nbsp;</div>
         </div>
+        <div class="clearfix">&nbsp;</div>
       </div>
     </div>
-    <div class="order-wrapper">
-      <div class="container">
-        <div class="row">
-          <div id="blk_message" style="display: none"></div>
-        </div>
-      </div>
-    </div>
-    <script>
-      // $(document).ready(function(){
-      //   $('#toll_free_number_800').click(function(e){
-      //     e.preventDefault();
-      //     $.ajax({
-      //       url:"'https://secure16.8msweb.com/8ms/api?userid=etollapi&password=utilkyap&request=GetAvails&reqparams=npalist~866;dn~866;rowlimit~50;trailingdigits~0', {mode:'no-cors'}",
-      //       type:'GET',
-      //       dataType: 'html',
-      //       data: {
-      //         a: "content #result_panel"
-      //       }
-      //     }).done(function(ketqua){
-      //       console.log(data)
-      //     })
-      //   })
-      // })
-      function phonenumberUI(){
-        var phonenumber= document.querySelector('#result_panel');
-        var inputphone = document.querySelector('.radio');
-        phonenumber.value;
-        let apiURL = ('https://secure16.8msweb.com/8ms/api?userid=etollapi&password=utilkyap&request=GetAvails&reqparams=npalist~866;dn~866;rowlimit~50;trailingdigits~0', {mode:'no-cors'});
-        fetch(apiURL).then(res=> res.json()).then(data => {console.table(data);return data;})
-      }
-      phonenumberUI()
-    </script>
+
+    <!-- //////////////////////////-->
     <script src="assets/number_search/js/jquery.js"></script>
     <script src="assets/number_search/js/bootstrap.min.js"></script>
     <script src="assets/number_search/js/order.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+      async function Randomcountry(){
+        var num=[];
+        let apiurl = 'https://date.nager.at/api/v3/AvailableCountries'
+        var data = await fetch(apiurl).then(res => res.json())       
+        for(let i=0; i<=10; i++){
+          num.push(data[Math.floor(Math.random(data) * 109)]);        
+        }
+        console.log(num);
+        var x = document.querySelector('#search');
+        for(var n = 0; n<=10; n++){          
+          const Country = document.createElement("option");
+          Country.text = num[n].name
+          Country.value= num[n].countryCode
+          x.add(Country, null);
+        } 
+      }
+      Randomcountry()
+      async function Apilehoi(){
+        var textcountry = document.querySelector('.modal-body')
+        var search = document.getElementById('search').value
+        let apiurl = 'https://date.nager.at/api/v3/PublicHolidays/2022/'+search
+        let lehoi = await fetch(apiurl).then(res => res.json())
+        var n = lehoi.length;    
+        for(let i=0; i<= n; i++){
+          var tagp = document.createElement('p');
+          tagp.innerHTML = lehoi[i].date + ' ' + lehoi[i].name;
+          textcountry.appendChild(tagp);
+        }      
+      }
+    </script>
   </body>
 </html>
